@@ -11,9 +11,14 @@ import ARKit
 
 struct ARViewContainer: UIViewRepresentable {
 
+    func makeCoordinator() -> ARViewCoordinator {
+        ARViewCoordinator()
+    }
+
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero)
         addCoachingOverlay(arView: arView)
+        context.coordinator.arView = arView
 
         // Load the "Box" scene from the "Experience" Reality File
         let boxAnchor = try! Experience.loadBox()
