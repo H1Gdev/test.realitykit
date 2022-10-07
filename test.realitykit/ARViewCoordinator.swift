@@ -32,7 +32,57 @@ extension ARViewCoordinator: ARSessionDelegate {
         for anchor in anchors {
             let anchorEntity = AnchorEntity(anchor: anchor)
 
+            if let planeAnchor = anchor as? ARPlaneAnchor {
+                // ModelEntity
+                // - MeshResource.generatePlane() generates only rectangle.
+                var descriptor = MeshDescriptor(name: "ARPlaneAnchor")
+                descriptor.positions = MeshBuffer(planeAnchor.geometry.vertices)
+                descriptor.primitives = .triangles(planeAnchor.geometry.triangleIndices.map { UInt32($0) })
+                descriptor.textureCoordinates = MeshBuffer(planeAnchor.geometry.textureCoordinates)
+
+                let material = UnlitMaterial(color: .green.withAlphaComponent(0.2))
+
+                let modelEntity = ModelEntity(mesh: try! .generate(from: [descriptor]), materials: [material])
+                anchorEntity.addChild(modelEntity)
+            }
+
             arView.scene.anchors.append(anchorEntity)
+        }
+    }
+
+    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+        guard let arView = arView else { return }
+
+        for anchor in anchors {
+            let filtered = arView.scene.anchors.filter {
+                if case .anchor(let anchorIdentifier) = $0.anchoring.target {
+                    return anchorIdentifier == anchor.identifier
+                }
+                return false
+            }
+            if let anchorEntity = filtered.first {
+                if let planeAnchor = anchor as? ARPlaneAnchor {
+                    // ModelEntity
+                    var descriptor = MeshDescriptor(name: "ARPlaneAnchor")
+                    descriptor.positions = MeshBuffer(planeAnchor.geometry.vertices)
+                    descriptor.primitives = .triangles(planeAnchor.geometry.triangleIndices.map { UInt32($0) })
+                    descriptor.textureCoordinates = MeshBuffer(planeAnchor.geometry.textureCoordinates)
+
+#if true
+                    // Recreate ModelEntity.
+                    let material = UnlitMaterial(color: .green.withAlphaComponent(0.2))
+
+                    let modelEntity = ModelEntity(mesh: try! .generate(from: [descriptor]), materials: [material])
+                    anchorEntity.children.remove(at: 0)
+                    anchorEntity.addChild(modelEntity)
+#else
+                    // Update ModelEntity.
+                    // It does not look like good results...
+                    let modelEntity = anchorEntity.children[0] as! ModelEntity
+                    modelEntity.model?.mesh = try! .generate(from: [descriptor])
+#endif
+                }
+            }
         }
     }
 
