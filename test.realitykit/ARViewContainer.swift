@@ -20,11 +20,7 @@ struct ARViewContainer: UIViewRepresentable {
         addCoachingOverlay(arView: arView)
         context.coordinator.arView = arView
 
-        // Load the "Box" scene from the "Experience" Reality File
-        let boxAnchor = try! Experience.loadBox()
-
-        // Add the box anchor to the scene
-        arView.scene.anchors.append(boxAnchor)
+        startARSession(arView: arView)
 
         return arView
     }
@@ -45,5 +41,25 @@ struct ARViewContainer: UIViewRepresentable {
                 arCoachingOverlayView.removeFromSuperview()
             }
         }
+    }
+
+    private func startARSession(arView: ARView, options:ARSession.RunOptions = []) {
+        arView.automaticallyConfigureSession = true
+
+#if false
+        let configuration = ARBodyTrackingConfiguration()
+#else
+        let configuration = ARWorldTrackingConfiguration()
+#endif
+        configuration.planeDetection = [.horizontal]
+        configuration.environmentTexturing = .automatic
+
+#if false
+        configuration.sceneReconstruction = .meshWithClassification
+        // https://developer.apple.com/documentation/realitykit/arview/debugoptions-swift.struct
+        arView.debugOptions.insert(.showAnchorGeometry)
+#endif
+
+        arView.session.run(configuration, options: options)
     }
 }
