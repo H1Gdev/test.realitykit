@@ -40,7 +40,12 @@ extension ARViewCoordinator: ARSessionDelegate {
         guard let arView = arView else { return }
 
         for anchor in anchors {
-            let filtered = arView.scene.anchors.filter { $0.anchorIdentifier == anchor.identifier }
+            let filtered = arView.scene.anchors.filter {
+                if case .anchor(let anchorIdentifier) = $0.anchoring.target {
+                    return anchorIdentifier == anchor.identifier
+                }
+                return false
+            }
             if let anchorEntity = filtered.first {
                 arView.scene.anchors.remove(anchorEntity)
             }
