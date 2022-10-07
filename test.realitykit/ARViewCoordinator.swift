@@ -6,10 +6,14 @@
 //
 
 import RealityKit
+import ARKit
 
-class ARViewCoordinator {
+class ARViewCoordinator: NSObject {
     var arView: ARView? {
         didSet {
         }
     }
+}
+
+extension ARViewCoordinator: ARSessionDelegate {
 }

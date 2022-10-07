@@ -20,7 +20,7 @@ struct ARViewContainer: UIViewRepresentable {
         addCoachingOverlay(arView: arView)
         context.coordinator.arView = arView
 
-        startARSession(arView: arView)
+        startARSession(arView: arView, delegate: context.coordinator)
 
         return arView
     }
@@ -43,7 +43,7 @@ struct ARViewContainer: UIViewRepresentable {
         }
     }
 
-    private func startARSession(arView: ARView, options:ARSession.RunOptions = []) {
+    private func startARSession(arView: ARView, delegate: ARSessionDelegate, options:ARSession.RunOptions = []) {
         arView.automaticallyConfigureSession = true
 
 #if false
@@ -60,6 +60,7 @@ struct ARViewContainer: UIViewRepresentable {
         arView.debugOptions.insert(.showAnchorGeometry)
 #endif
 
+        arView.session.delegate = delegate
         arView.session.run(configuration, options: options)
     }
 }
