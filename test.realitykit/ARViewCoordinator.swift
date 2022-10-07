@@ -10,10 +10,40 @@ import ARKit
 
 class ARViewCoordinator: NSObject {
     var arView: ARView? {
+        willSet {
+            removeAllAnchorEntities()
+        }
         didSet {
         }
+    }
+
+    private func removeAllAnchorEntities() {
+        guard let arView = arView else { return }
+
+        arView.scene.anchors.removeAll()
     }
 }
 
 extension ARViewCoordinator: ARSessionDelegate {
+
+    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+        guard let arView = arView else { return }
+
+        for anchor in anchors {
+            let anchorEntity = AnchorEntity(anchor: anchor)
+
+            arView.scene.anchors.append(anchorEntity)
+        }
+    }
+
+    func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
+        guard let arView = arView else { return }
+
+        for anchor in anchors {
+            let filtered = arView.scene.anchors.filter { $0.anchorIdentifier == anchor.identifier }
+            if let anchorEntity = filtered.first {
+                arView.scene.anchors.remove(anchorEntity)
+            }
+        }
+    }
 }
