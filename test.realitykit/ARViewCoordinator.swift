@@ -11,9 +11,11 @@ import ARKit
 class ARViewCoordinator: NSObject {
     var arView: ARView? {
         willSet {
+            removeGesture()
             removeAllAnchorEntities()
         }
         didSet {
+            addGesture()
         }
     }
 
@@ -21,6 +23,49 @@ class ARViewCoordinator: NSObject {
         guard let arView = arView else { return }
 
         arView.scene.anchors.removeAll()
+    }
+}
+
+extension ARViewCoordinator {
+    private func addGesture() {
+        guard let arView = arView else { return }
+
+        arView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:))))
+    }
+
+    private func removeGesture() {
+        guard let arView = arView else { return }
+
+#if true
+        arView.gestureRecognizers?.forEach(arView.removeGestureRecognizer)
+#else
+        for gestureRecognizer in arView.gestureRecognizers ?? [] {
+            arView.removeGestureRecognizer(gestureRecognizer)
+        }
+#endif
+    }
+
+    @objc
+    private func handleTap(recognizer: UITapGestureRecognizer) {
+        guard let arView = arView else { return }
+
+        let tapLocation = recognizer.location(in: arView)
+        print("[Tap]\(tapLocation)")
+
+#if true
+        let raycasts = arView.raycast(from: tapLocation, allowing: .existingPlaneGeometry, alignment: .horizontal)
+
+        if let result = raycasts.first {
+            print("[Raycast]\(Transform(matrix: result.worldTransform))")
+        }
+#endif
+
+#if true
+        let hits = arView.hitTest(tapLocation)
+        if let result = hits.last {
+            print("[Hit]\(result.entity.convert(transform: .identity, to: nil))")
+        }
+#endif
     }
 }
 
