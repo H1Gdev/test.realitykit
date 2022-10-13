@@ -7,22 +7,34 @@
 
 import RealityKit
 import ARKit
+import Combine
 
 class ARViewCoordinator: NSObject {
     var arView: ARView? {
         willSet {
             removeGesture()
+            cancelAll()
             removeAllAnchorEntities()
         }
         didSet {
             addGesture()
+            addCollisionEvents()
         }
     }
+
+    private var cancellables: [Cancellable] = []
 
     private func removeAllAnchorEntities() {
         guard let arView = arView else { return }
 
         arView.scene.anchors.removeAll()
+    }
+
+    private func cancelAll() {
+        for cancellable in cancellables {
+            cancellable.cancel()
+        }
+        cancellables.removeAll()
     }
 }
 
@@ -66,6 +78,60 @@ extension ARViewCoordinator {
             print("[Hit]\(result.entity.convert(transform: .identity, to: nil))")
         }
 #endif
+    }
+}
+
+extension ARViewCoordinator {
+    private func addCollisionEvents() {
+        guard let arView = arView else { return }
+
+#if false
+        let began = arView.scene.subscribe(to: CollisionEvents.Began.self)
+        { event in
+            print("[Collision][Began]\(event.entityA.name) - \(event.entityB.name)")
+        }
+#else
+        let began = arView.scene.subscribe(to: CollisionEvents.Began.self)
+        { [weak self] event in
+            guard let self = self else { return }
+
+            print("[Collision][Began]\(event.entityA.name) - \(event.entityB.name)")
+            print(String(describing: type(of: self)))
+        }
+#endif
+        cancellables.append(began)
+
+#if false
+        let updated = arView.scene.subscribe(to: CollisionEvents.Updated.self)
+        { event in
+            print("[Collision][Updated]\(event.entityA.name) - \(event.entityB.name)")
+        }
+#else
+        let updated = arView.scene.subscribe(to: CollisionEvents.Updated.self)
+        { [weak self] event in
+            guard let self = self else { return }
+
+            print("[Collision][Updated]\(event.entityA.name) - \(event.entityB.name)")
+            print(String(describing: type(of: self)))
+        }
+#endif
+        cancellables.append(updated)
+
+#if false
+        let ended = arView.scene.subscribe(to: CollisionEvents.Ended.self)
+        { event in
+            print("[Collision][Ended]\(event.entityA.name) - \(event.entityB.name)")
+        }
+#else
+        let ended = arView.scene.subscribe(to: CollisionEvents.Ended.self)
+        { [weak self] event in
+            guard let self = self else { return }
+
+            print("[Collision][Ended]\(event.entityA.name) - \(event.entityB.name)")
+            print(String(describing: type(of: self)))
+        }
+#endif
+        cancellables.append(ended)
     }
 }
 
