@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F242231E2909623F0004EE63 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F242231D2909623F0004EE63 /* ARViewContainer.swift */; };
 		F26C0C6A28F0116C000CDA8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C0C6928F0116C000CDA8D /* AppDelegate.swift */; };
 		F26C0C6C28F0116C000CDA8D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C0C6B28F0116C000CDA8D /* ContentView.swift */; };
 		F26C0C6E28F0116C000CDA8D /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = F26C0C6D28F0116C000CDA8D /* Experience.rcproject */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F242231D2909623F0004EE63 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
 		F26C0C6628F0116C000CDA8D /* test.realitykit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test.realitykit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26C0C6928F0116C000CDA8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F26C0C6B28F0116C000CDA8D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			children = (
 				F26C0C6928F0116C000CDA8D /* AppDelegate.swift */,
 				F26C0C6B28F0116C000CDA8D /* ContentView.swift */,
+				F242231D2909623F0004EE63 /* ARViewContainer.swift */,
 				F26C0C6D28F0116C000CDA8D /* Experience.rcproject */,
 				F26C0C6F28F0116C000CDA8D /* Assets.xcassets */,
 				F26C0C7128F0116C000CDA8D /* Preview Content */,
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F26C0C6C28F0116C000CDA8D /* ContentView.swift in Sources */,
+				F242231E2909623F0004EE63 /* ARViewContainer.swift in Sources */,
 				F26C0C6A28F0116C000CDA8D /* AppDelegate.swift in Sources */,
 				F26C0C6E28F0116C000CDA8D /* Experience.rcproject in Sources */,
 			);
