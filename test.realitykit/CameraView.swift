@@ -9,6 +9,7 @@ import UIKit
 import AVFoundation
 
 class CameraView: UIView {
+    var videoDataOutputSampleBufferDelegate: AVCaptureVideoDataOutputSampleBufferDelegate?
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -27,6 +28,15 @@ class CameraView: UIView {
         let session = AVCaptureSession()
         if session.canAddInput(input) {
             session.addInput(input)
+        }
+        if let videoDataOutputSampleBufferDelegate = videoDataOutputSampleBufferDelegate {
+            let output = AVCaptureVideoDataOutput()
+            output.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)]
+            let sampleBufferCallbackQueue = DispatchQueue.global(qos: .userInitiated)
+            output.setSampleBufferDelegate(videoDataOutputSampleBufferDelegate, queue: sampleBufferCallbackQueue)
+            if session.canAddOutput(output) {
+                session.addOutput(output)
+            }
         }
         session.startRunning()
 

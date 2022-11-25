@@ -63,3 +63,14 @@ extension CameraViewCoordinator {
         }
     }
 }
+
+extension CameraViewCoordinator: AVCaptureVideoDataOutputSampleBufferDelegate {
+
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            return
+        }
+
+        print("[Output] \(CVPixelBufferGetWidth(pixelBuffer))x\(CVPixelBufferGetHeight(pixelBuffer))")
+    }
+}

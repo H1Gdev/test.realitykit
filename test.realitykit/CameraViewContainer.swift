@@ -19,6 +19,8 @@ struct CameraViewContainer: UIViewRepresentable {
 
         context.coordinator.cameraView = cameraView
 
+        cameraView.videoDataOutputSampleBufferDelegate = context.coordinator
+
         return cameraView
     }
 
