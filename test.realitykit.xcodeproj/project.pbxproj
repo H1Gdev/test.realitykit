@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		F242231E2909623F0004EE63 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F242231D2909623F0004EE63 /* ARViewContainer.swift */; };
 		F24223222909640F0004EE63 /* ARViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24223212909640F0004EE63 /* ARViewCoordinator.swift */; };
+		F2442D2D29305FB400C163D4 /* CameraViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2442D2C29305FB400C163D4 /* CameraViewContainer.swift */; };
+		F2442D2F29305FE100C163D4 /* CameraViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2442D2E29305FE100C163D4 /* CameraViewCoordinator.swift */; };
+		F2442D31293060F700C163D4 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2442D30293060F700C163D4 /* CameraView.swift */; };
 		F26C0C6A28F0116C000CDA8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C0C6928F0116C000CDA8D /* AppDelegate.swift */; };
 		F26C0C6C28F0116C000CDA8D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C0C6B28F0116C000CDA8D /* ContentView.swift */; };
 		F26C0C6E28F0116C000CDA8D /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = F26C0C6D28F0116C000CDA8D /* Experience.rcproject */; };
@@ -19,6 +22,9 @@
 /* Begin PBXFileReference section */
 		F242231D2909623F0004EE63 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
 		F24223212909640F0004EE63 /* ARViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewCoordinator.swift; sourceTree = "<group>"; };
+		F2442D2C29305FB400C163D4 /* CameraViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewContainer.swift; sourceTree = "<group>"; };
+		F2442D2E29305FE100C163D4 /* CameraViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewCoordinator.swift; sourceTree = "<group>"; };
+		F2442D30293060F700C163D4 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		F26C0C6628F0116C000CDA8D /* test.realitykit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test.realitykit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26C0C6928F0116C000CDA8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F26C0C6B28F0116C000CDA8D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +67,9 @@
 				F26C0C6B28F0116C000CDA8D /* ContentView.swift */,
 				F242231D2909623F0004EE63 /* ARViewContainer.swift */,
 				F24223212909640F0004EE63 /* ARViewCoordinator.swift */,
+				F2442D2C29305FB400C163D4 /* CameraViewContainer.swift */,
+				F2442D30293060F700C163D4 /* CameraView.swift */,
+				F2442D2E29305FE100C163D4 /* CameraViewCoordinator.swift */,
 				F26C0C6D28F0116C000CDA8D /* Experience.rcproject */,
 				F26C0C6F28F0116C000CDA8D /* Assets.xcassets */,
 				F26C0C7128F0116C000CDA8D /* Preview Content */,
@@ -147,10 +156,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F26C0C6C28F0116C000CDA8D /* ContentView.swift in Sources */,
+				F2442D2F29305FE100C163D4 /* CameraViewCoordinator.swift in Sources */,
 				F24223222909640F0004EE63 /* ARViewCoordinator.swift in Sources */,
 				F242231E2909623F0004EE63 /* ARViewContainer.swift in Sources */,
 				F26C0C6A28F0116C000CDA8D /* AppDelegate.swift in Sources */,
 				F26C0C6E28F0116C000CDA8D /* Experience.rcproject in Sources */,
+				F2442D2D29305FB400C163D4 /* CameraViewContainer.swift in Sources */,
+				F2442D31293060F700C163D4 /* CameraView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
