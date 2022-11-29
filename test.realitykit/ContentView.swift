@@ -8,9 +8,24 @@
 import SwiftUI
 
 struct ContentView : View {
+#if true
     var body: some View {
         ARViewContainer().edgesIgnoringSafeArea(.all)
     }
+#else
+    @State var orientation = UIDevice.current.orientation
+
+    var body: some View {
+        CameraViewContainer(orientation: $orientation)
+            .edgesIgnoringSafeArea(.all)
+            .onAppear {
+                orientation = UIDevice.current.orientation
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+                orientation = UIDevice.current.orientation
+            }
+    }
+#endif
 }
 
 #if DEBUG
